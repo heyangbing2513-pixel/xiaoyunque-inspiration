@@ -332,6 +332,107 @@
 }
 
 /* ==========================================================================
+   Assets grid — replaces column-count masonry for uniform row alignment
+   ========================================================================== */
+.assets-grid{
+  display: grid;
+  gap: 14px;
+}
+.assets-grid.col-3{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.assets-grid.col-4{ grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1200px){
+  .assets-grid.col-4{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .assets-grid.col-3{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Ensure scene/lens use 16:9 real covers */
+.insp-asset.scene .insp-asset-img,
+.insp-asset.lens .insp-asset-img{ aspect-ratio: 16/9; }
+.insp-asset.prop .insp-asset-img{ aspect-ratio: 4/3; }
+
+/* ==========================================================================
+   Stories grid — 竖卡片，展示优质故事 prompt
+   ========================================================================== */
+.stories-grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 1400px){ .stories-grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 1100px){ .stories-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.insp-story{
+  display: flex;flex-direction: column;
+  background: var(--insp-card);
+  border: 1px solid var(--insp-line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+}
+.insp-story:hover{
+  transform: translateY(-3px);
+  border-color: var(--insp-line-2);
+  box-shadow: 0 14px 34px rgba(26,24,20,0.12);
+}
+.insp-story-cover{
+  position: relative;
+  aspect-ratio: 4/3;
+  background-size: cover;background-position: center;
+}
+.insp-story-cover::after{
+  content: "";position: absolute;inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 55%);
+  pointer-events: none;
+}
+.insp-story-genre{
+  position: absolute;top: 10px;left: 10px;
+  padding: 3px 9px;border-radius: 6px;
+  background: rgba(255,255,255,0.95);
+  font-size: 10.5px;font-weight: 700;letter-spacing: .4px;
+  color: #1A1410;
+  z-index: 1;
+}
+.insp-story-duration{
+  position: absolute;bottom: 10px;left: 10px;
+  padding: 3px 8px;border-radius: 6px;
+  background: rgba(0,0,0,0.62);backdrop-filter: blur(6px);
+  color: #fff;font-size: 11px;
+  display: flex;align-items: center;gap: 5px;
+  z-index: 1;
+}
+
+.insp-story-body{
+  flex: 1;
+  padding: 14px 16px 16px;
+  display: flex;flex-direction: column;gap: 8px;
+}
+.insp-story-title{
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 16px;font-weight: 600;
+  color: var(--insp-ink-1);
+  line-height: 1.35;
+}
+.insp-story-tags{
+  display: flex;gap: 5px;flex-wrap: wrap;
+}
+.insp-story-prompt{
+  flex: 1;
+  font-size: 12.5px;line-height: 1.65;
+  color: var(--insp-ink-2);
+  /* clamp to 8 lines to avoid runaway cards */
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.insp-story-footer{
+  display: flex;justify-content: space-between;align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid var(--insp-line);
+  margin-top: 4px;
+}
+
+/* ==========================================================================
    Narrow viewport fallback (keeps layout readable on smaller screens)
    ========================================================================== */
 @media (max-width: 1100px){

@@ -50,15 +50,17 @@ const InspirationCard = ({ item, onOpen }) => {
   );
 };
 
-// Compact asset card for 角色/道具/场景/风格 etc.
-const AssetCard = ({ item, kind, onUse, onRemix }) => {
+// Compact asset card for 角色/道具/场景/镜头/风格 —
+// 统一 hover: 左 [+资产库] 右 [使用]，使用=直接入输入框
+const AssetCard = ({ item, kind, onUse, onSave }) => {
   const imgStyle = { backgroundImage: `url(${item.img})` };
-  // 真实角色立绘 (白底竖图) 用 contain 保留全身；占位 svg 方图保持 cover
+  // 真实角色立绘 (白底竖图) 用 contain 保留全身；其他横图保持 cover
   if (item.fit === 'contain') {
     imgStyle.backgroundSize = 'contain';
     imgStyle.backgroundRepeat = 'no-repeat';
     imgStyle.backgroundColor = '#FFFFFF';
   }
+  const kindLabel = { character:'角色', prop:'道具', scene:'场景', lens:'镜头', style:'风格' }[kind] || '素材';
   return (
     <div className={`insp-asset ${kind}`}>
       <div className="insp-asset-img" style={imgStyle}>
@@ -70,12 +72,16 @@ const AssetCard = ({ item, kind, onUse, onRemix }) => {
             </>
           )}
           <div className="insp-actions" style={{marginTop: item.prompt ? 0 : 'auto'}}>
-            {item.prompt && (
-              <button className="insp-btn ghost" onClick={(e) => { e.stopPropagation(); onRemix(item); }}>
-                <Icon name="shuffle" size={12}/> Remix
-              </button>
-            )}
-            <button className="insp-btn primary" onClick={(e) => { e.stopPropagation(); onUse({ ...item, kind }); }}>
+            <button
+              className="insp-btn ghost"
+              onClick={(e) => { e.stopPropagation(); onSave && onSave(item, kindLabel); }}
+            >
+              <Icon name="bookmark" size={12}/> 资产库
+            </button>
+            <button
+              className="insp-btn primary"
+              onClick={(e) => { e.stopPropagation(); onUse({ id: item.id, kind: kindLabel, label: item.name, thumb: item.img }); }}
+            >
               <Icon name="add_plus" size={12}/> 使用
             </button>
           </div>
@@ -91,6 +97,41 @@ const AssetCard = ({ item, kind, onUse, onRemix }) => {
     </div>
   );
 };
+
+// Story card — 竖卡片，上图下大段 prompt 文字
+const StoryCard = ({ item, onUse, onSave }) => (
+  <div className="insp-story">
+    <div className="insp-story-cover" style={{ backgroundImage: `url(${item.cover})` }}>
+      <span className="insp-story-genre">{item.genre}</span>
+      <span className="insp-story-duration">
+        <Icon name="clock" size={10}/> {item.duration} · {item.acts} 幕
+      </span>
+    </div>
+    <div className="insp-story-body">
+      <div className="insp-story-title">{item.name}</div>
+      <div className="insp-story-tags">
+        {item.tags.map((t, i) => <span key={i} className="insp-tag">{t}</span>)}
+      </div>
+      <div className="insp-story-prompt">{item.prompt}</div>
+      <div className="insp-story-footer">
+        <div className="insp-stats">
+          <Icon name="heart" size={10}/> {item.likes > 999 ? `${(item.likes/1000).toFixed(1)}k` : item.likes}
+        </div>
+        <div style={{display:'flex',gap:6}}>
+          <button className="insp-btn ghost" onClick={() => onSave && onSave(item, '故事')}>
+            <Icon name="bookmark" size={12}/> 资产库
+          </button>
+          <button
+            className="insp-btn primary"
+            onClick={() => onUse({ id: item.id, kind: '故事', label: item.name, thumb: item.cover })}
+          >
+            <Icon name="add_plus" size={12}/> 使用
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 // Prompt template card (text-heavy)
 const PromptCard = ({ item, onUse }) => (
@@ -111,4 +152,4 @@ const PromptCard = ({ item, onUse }) => (
   </div>
 );
 
-Object.assign(window, { InspirationCard, AssetCard, PromptCard });
+Object.assign(window, { InspirationCard, AssetCard, PromptCard, StoryCard });

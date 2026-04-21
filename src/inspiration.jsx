@@ -1,8 +1,8 @@
 // Main inspiration module - orchestrates tabs, search, layout
-const Inspiration = ({ onUse, onRemix, onOpen }) => {
+const Inspiration = ({ onUse, onRemix, onSave, onOpen }) => {
   const {
     INSPIRATION_TABS, FEATURED_WORKS, FEATURED_DECOMPOSE,
-    CHARACTERS, PROPS, SCENES, LENSES, STYLES, REMIXES, PROMPTS
+    CHARACTERS, PROPS, SCENES, LENSES, STORIES, STYLES, REMIXES, PROMPTS
   } = window.__INSP_DATA__;
 
   const [tab, setTab] = React.useState('featured');
@@ -26,28 +26,33 @@ const Inspiration = ({ onUse, onRemix, onOpen }) => {
       );
     }
     if (tab === 'character') {
-      return <div className="masonry" style={{columnCount:5}}>
-        {CHARACTERS.map(c => <AssetCard key={c.id} item={c} kind="character" onUse={onUse} onRemix={onRemix}/>)}
+      return <div className="assets-grid col-4">
+        {CHARACTERS.map(c => <AssetCard key={c.id} item={c} kind="character" onUse={onUse} onSave={onSave}/>)}
       </div>;
     }
     if (tab === 'prop') {
-      return <div className="masonry" style={{columnCount:5}}>
-        {PROPS.map(c => <AssetCard key={c.id} item={c} kind="prop" onUse={onUse} onRemix={onRemix}/>)}
+      return <div className="assets-grid col-4">
+        {PROPS.map(c => <AssetCard key={c.id} item={c} kind="prop" onUse={onUse} onSave={onSave}/>)}
       </div>;
     }
     if (tab === 'scene') {
-      return <div className="masonry" style={{columnCount:3}}>
-        {SCENES.map(c => <AssetCard key={c.id} item={c} kind="scene" onUse={onUse} onRemix={onRemix}/>)}
+      return <div className="assets-grid col-3">
+        {SCENES.map(c => <AssetCard key={c.id} item={c} kind="scene" onUse={onUse} onSave={onSave}/>)}
       </div>;
     }
     if (tab === 'lens') {
-      return <div className="masonry" style={{columnCount:4}}>
-        {LENSES.map(c => <AssetCard key={c.id} item={c} kind="lens" onUse={onUse} onRemix={onRemix}/>)}
+      return <div className="assets-grid col-3">
+        {LENSES.map(c => <AssetCard key={c.id} item={c} kind="lens" onUse={onUse} onSave={onSave}/>)}
+      </div>;
+    }
+    if (tab === 'story') {
+      return <div className="stories-grid">
+        {STORIES.map(s => <StoryCard key={s.id} item={s} onUse={onUse} onSave={onSave}/>)}
       </div>;
     }
     if (tab === 'style') {
-      return <div className="masonry" style={{columnCount:4}}>
-        {STYLES.map(c => <AssetCard key={c.id} item={c} kind="style" onUse={(v) => onUse({...v, kind:'风格'})} onRemix={onRemix}/>)}
+      return <div className="assets-grid col-4">
+        {STYLES.map(c => <AssetCard key={c.id} item={c} kind="style" onUse={onUse} onSave={onSave}/>)}
       </div>;
     }
     if (tab === 'remix') {

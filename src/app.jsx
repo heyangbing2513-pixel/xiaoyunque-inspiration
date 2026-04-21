@@ -62,6 +62,10 @@ const App = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const onSave = (item, kindLabel) => {
+    showToast(`已收藏「${item.name}」到${kindLabel || ''}资产库`);
+  };
+
   const removeChip = (id) => setChips(prev => prev.filter(c => c.id !== id));
 
   return (
@@ -73,7 +77,7 @@ const App = () => {
           <Composer text={text} setText={setText} chips={chips} removeChip={removeChip}/>
         </div>
         <FeatureRow/>
-        <Inspiration onUse={onUse} onRemix={onRemix} onOpen={setDetailItem}/>
+        <Inspiration onUse={onUse} onRemix={onRemix} onSave={onSave} onOpen={setDetailItem}/>
         <div className="footer-space"/>
       </main>
 

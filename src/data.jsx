@@ -30,6 +30,7 @@ const INSPIRATION_TABS = [
   { id: 'prop', label: '道具', icon: 'package', count: 924 },
   { id: 'scene', label: '场景', icon: 'mountain', count: 1340 },
   { id: 'lens', label: '镜头语言', icon: 'camera', count: 186 },
+  { id: 'story', label: '故事设计', icon: 'quote', count: 412 },
   { id: 'style', label: '风格 / 画风', icon: 'palette', count: 312 },
   { id: 'remix', label: '热门 Remix', icon: 'shuffle', count: 96 },
   { id: 'prompt', label: '提示词模板', icon: 'quote', count: 520 },
@@ -189,50 +190,136 @@ const FEATURED_WORKS = [
 // Featured 模块已改为统一横图网格，不再有 hero 拆解卡；保留空对象供组件兼容
 const FEATURED_DECOMPOSE = {};
 
-// === Characters — 前 4 个为真实古风角色立绘 (fit:contain 保留全身)；c5-c8 为占位
+// === Characters — 前 4 个为真实古风角色立绘，c5-c8 复用同组立绘（MVP 演示完整 8 位）
 const CHARACTERS = [
   { id: 'c1', name: '冷霜', tags: ['古风', '女侠', '清冷'], likes: 4821, img: './characters/lengshuang.jpg', fit: 'contain', prompt: '白衣高束发女子，湖蓝腰带，胸前黑玉佩，袖口银色裂纹纹饰，气质冷冽' },
   { id: 'c2', name: '沧溟', tags: ['古风', '异族', '邪魅'], likes: 3960, img: './characters/cangming.jpg', fit: 'contain', prompt: '银白长发赤膊男性，双耳戴粉色贝壳饰品，胸口图腾纹身，黑色宽松长裤' },
   { id: 'c3', name: '柳青', tags: ['古风', '剑修', '儒雅'], likes: 5104, img: './characters/liuqing.jpg', fit: 'contain', prompt: '白色长袍内搭湖蓝襦裙，青色祥云纹，头顶黑色蛇形发簪，黑靴，气质儒雅邪性' },
   { id: 'c4', name: '长老', tags: ['古风', '长辈', '威严'], likes: 3207, img: './characters/zhanglao.jpg', fit: 'contain', prompt: '银白长发额前蓝色印记，深蓝长袍白色交领，铜扣腰带，米色厚底长靴' },
-  { id: 'c5', name: '吉卜力邮差少年', tags: ['吉卜力'], likes: 2843, img: svgPlaceholder('邮差', 500, 500, '#6EE7B7', '#FEF3C7'), prompt: '骑自行车送信的少年，草原背景' },
-  { id: 'c6', name: '霓虹女歌手', tags: ['赛博朋克'], likes: 3891, img: svgPlaceholder('歌手', 500, 500, '#EC4899', '#06B6D4'), prompt: '紫色长发，全息麦克风，雨夜舞台' },
-  { id: 'c7', name: '机甲少女 · 伊芙', tags: ['科幻'], likes: 3201, img: svgPlaceholder('Eve', 500, 500, '#667EEA', '#F093FB'), prompt: '银白短发机甲少女，赛博朋克，冷光' },
-  { id: 'c8', name: '童话兔子绅士', tags: ['童话', '动物'], likes: 1240, img: svgPlaceholder('兔先生', 500, 500, '#F472B6', '#FEF3C7'), prompt: '戴高帽西装兔，怀表，插画感' },
+  { id: 'c5', name: '冷霜（雪落式）', tags: ['古风', '女侠'], likes: 2410, img: './characters/lengshuang.jpg', fit: 'contain', prompt: '白衣高束发女子，雪夜出剑姿态，袖口银线流光，寒气四溢' },
+  { id: 'c6', name: '沧溟（渊海式）', tags: ['古风', '异族'], likes: 2188, img: './characters/cangming.jpg', fit: 'contain', prompt: '银白长发男子，耳饰珊瑚贝壳，胸口图腾亮起微光，海潮涌动背景' },
+  { id: 'c7', name: '柳青（青锋式）', tags: ['古风', '剑修'], likes: 3045, img: './characters/liuqing.jpg', fit: 'contain', prompt: '白袍剑修，湖蓝内衬，青色祥云纹，发间蛇形玉簪，手握长剑' },
+  { id: 'c8', name: '长老（镇岳式）', tags: ['古风', '长辈'], likes: 1920, img: './characters/zhanglao.jpg', fit: 'contain', prompt: '银发长者，额前蓝色印记若隐若现，深蓝长袍沉稳站立' },
 ];
 
+// 道具 / 场景 / 镜头：复用 TapTV covers 作为真实参考图（MVP 演示）
+// — 同一组图在不同 tab 承担不同角色：cover 是场景，裁切中心是道具，构图是镜头
 const PROPS = [
-  { id: 'p1', name: '发光机械核心', tags: ['科幻'], likes: 1203, img: svgPlaceholder('Core', 400, 500, '#06B6D4', '#8B5CF6') },
-  { id: 'p2', name: '古剑 · 秋水', tags: ['武侠'], likes: 892, img: svgPlaceholder('秋水', 400, 500, '#4A5568', '#CBD5E0') },
-  { id: 'p3', name: '紫砂茶壶', tags: ['东方'], likes: 543, img: svgPlaceholder('紫砂', 400, 500, '#92400E', '#FED7AA') },
-  { id: 'p4', name: '水晶麦克风', tags: ['赛博朋克'], likes: 1892, img: svgPlaceholder('Mic', 400, 500, '#EC4899', '#F472B6') },
-  { id: 'p5', name: '铜制义眼', tags: ['蒸汽朋克'], likes: 721, img: svgPlaceholder('Eye', 400, 500, '#D97706', '#78350F') },
-  { id: 'p6', name: '竹制风铃', tags: ['东方', '治愈'], likes: 1045, img: svgPlaceholder('风铃', 400, 500, '#6EE7B7', '#FEF3C7') },
-  { id: 'p7', name: '悬浮魔法书', tags: ['奇幻'], likes: 1532, img: svgPlaceholder('Book', 400, 500, '#8B5CF6', '#F5AF19') },
-  { id: 'p8', name: '老式相机', tags: ['复古'], likes: 876, img: svgPlaceholder('Camera', 400, 500, '#78350F', '#FEF3C7') },
+  { id: 'p1', name: '发光机械核心', tags: ['科幻'], likes: 1203, img: './covers/cover-1.jpg', prompt: '金属幽蓝走廊核心光源，蓝白高对比，赛博感' },
+  { id: 'p2', name: '港式霓虹茶楼灯', tags: ['港风'], likes: 892, img: './covers/cover-2.jpg', prompt: '老茶楼吊灯，暖黄光晕，玻璃反光，烟火气' },
+  { id: 'p3', name: '军官面具', tags: ['战争'], likes: 1543, img: './covers/cover-3.jpg', prompt: '防毒面具特写，金属质感，冷蓝调' },
+  { id: 'p4', name: '金色派皮字', tags: ['复古', '平面'], likes: 721, img: './covers/cover-4.jpg', prompt: '烘焙字母拼接海报，暖棕色调，美食质感' },
+  { id: 'p5', name: '霓虹招牌', tags: ['美式复古'], likes: 1045, img: './covers/cover-5.jpg', prompt: '红色霓虹灯招牌，50 年代美式字体，蓝天对比' },
+  { id: 'p6', name: '红色鬼面具', tags: ['日漫', '战斗'], likes: 1532, img: './covers/cover-6.jpg', prompt: '日式妖怪鬼面，朱红漆色，金纹装饰' },
+  { id: 'p7', name: '百叶窗', tags: ['悬疑'], likes: 876, img: './covers/cover-7.jpg', prompt: '水平百叶窗，光影切割人脸，心理悬疑' },
+  { id: 'p8', name: '毛笔字幅', tags: ['手绘', '温情'], likes: 2103, img: './covers/cover-8.jpg', prompt: '黄纸毛笔书法字，墨迹浓淡，手写温度' },
 ];
 
 const SCENES = [
-  { id: 's1', name: '雨夜涩谷十字路口', tags: ['赛博朋克', '城市'], likes: 4203, img: svgPlaceholder('Shibuya', 640, 400, '#1E3A8A', '#E94560') },
-  { id: 's2', name: '云海竹林', tags: ['东方', '自然'], likes: 2189, img: svgPlaceholder('竹林', 640, 400, '#065F46', '#A7F3D0') },
-  { id: 's3', name: '废弃工厂', tags: ['废土'], likes: 1432, img: svgPlaceholder('工厂', 640, 400, '#44403C', '#FCA5A5') },
-  { id: 's4', name: '海底水晶宫', tags: ['奇幻'], likes: 3421, img: svgPlaceholder('水晶宫', 640, 400, '#0C4A6E', '#BAE6FD') },
-  { id: 's5', name: '潮汕菜市场', tags: ['纪录片', '烟火'], likes: 1654, img: svgPlaceholder('菜市场', 640, 400, '#D97706', '#991B1B') },
-  { id: 's6', name: '极光下的森林', tags: ['自然'], likes: 2892, img: svgPlaceholder('极光', 640, 400, '#064E3B', '#A7F3D0') },
-  { id: 's7', name: '蒸汽朋克飞艇港', tags: ['蒸汽朋克'], likes: 1823, img: svgPlaceholder('飞艇港', 640, 400, '#92400E', '#FED7AA') },
-  { id: 's8', name: '沙漠绿洲黄昏', tags: ['自然'], likes: 1234, img: svgPlaceholder('绿洲', 640, 400, '#D97706', '#FEF3C7') },
+  { id: 's1', name: '金属幽蓝走廊', tags: ['赛博朋克', '科幻'], likes: 4203, img: './covers/cover-1.jpg', prompt: '长廊深处蓝冷光源，金属反光，极致透视' },
+  { id: 's2', name: '港式老茶楼', tags: ['港风', '烟火'], likes: 2189, img: './covers/cover-2.jpg', prompt: '木桌铜壶，吊顶暖灯，窗外橘猫俯视' },
+  { id: 's3', name: '末世军事地堡', tags: ['战争', '末世'], likes: 1432, img: './covers/cover-3.jpg', prompt: '冷蓝钢铁地堡，顶光硬阴影，压迫感' },
+  { id: 's4', name: '复古美式郊区', tags: ['美式复古'], likes: 3421, img: './covers/cover-5.jpg', prompt: '50 年代排屋，蓝天白云，霓虹招牌点缀' },
+  { id: 's5', name: '异界战斗空间', tags: ['日漫', '异界'], likes: 1654, img: './covers/cover-6.jpg', prompt: '朱红狂风漫画感，少年与妖怪对峙' },
+  { id: 's6', name: '百叶窗镜廊', tags: ['悬疑', '心理'], likes: 2892, img: './covers/cover-7.jpg', prompt: '多扇百叶窗叠加，女孩面孔递进，心理空间' },
+  { id: 's7', name: '火星废土天文台', tags: ['末世', '科幻'], likes: 1823, img: './covers/cover-9.jpg', prompt: '血红地平线锈迹穹顶，孤寂末世感' },
+  { id: 's8', name: '十字架墓园', tags: ['暗黑', '史诗'], likes: 1234, img: './covers/cover-11.jpg', prompt: '白色十字架海洋，紫色暗调，大提琴独奏' },
 ];
 
-// Lens / camera work
+// Lens / camera work — 复用 covers 作为镜头语言参考图
 const LENSES = [
-  { id: 'l1', name: '希区柯克变焦', tags: ['运镜'], likes: 892, img: svgPlaceholder('Dolly Zoom', 500, 500, '#1F2937', '#F472B6'), prompt: 'Dolly zoom 希区柯克变焦，紧张氛围' },
-  { id: 'l2', name: '一镜到底长跟拍', tags: ['运镜'], likes: 1432, img: svgPlaceholder('Oner', 500, 500, '#7C3AED', '#F5AF19'), prompt: '一镜到底，跟拍主角穿越多个空间' },
-  { id: 'l3', name: '升格慢动作', tags: ['运镜'], likes: 2103, img: svgPlaceholder('Slow-mo', 500, 500, '#06B6D4', '#EC4899'), prompt: '120fps升格拍摄，水滴飞溅' },
-  { id: 'l4', name: '上帝视角俯拍', tags: ['运镜'], likes: 784, img: svgPlaceholder('God view', 500, 500, '#065F46', '#6EE7B7'), prompt: '无人机俯拍，上帝视角垂直下降' },
-  { id: 'l5', name: 'POV第一人称', tags: ['运镜'], likes: 1245, img: svgPlaceholder('POV', 500, 500, '#991B1B', '#F472B6'), prompt: '手持POV第一人称视角' },
-  { id: 'l6', name: '环绕镜头', tags: ['运镜'], likes: 934, img: svgPlaceholder('Orbit', 500, 500, '#5B21B6', '#06B6D4'), prompt: '360度环绕主角，电影感' },
-  { id: 'l7', name: '荧幕边缘溢出', tags: ['运镜'], likes: 523, img: svgPlaceholder('Overflow', 500, 500, '#D97706', '#1F2937'), prompt: '物体从画框边缘溢出' },
-  { id: 'l8', name: '希区柯克逆向推轨', tags: ['运镜'], likes: 612, img: svgPlaceholder('Reverse', 500, 500, '#0C4A6E', '#FEF3C7'), prompt: '推轨后退同时变焦拉近' },
+  { id: 'l1', name: '深焦透视走廊', tags: ['构图'], likes: 892, img: './covers/cover-1.jpg', prompt: '极致中心透视，灭点居中，深焦长走廊，强压缩感' },
+  { id: 'l2', name: '高机位观察视角', tags: ['视角'], likes: 1432, img: './covers/cover-2.jpg', prompt: '橘猫高机位俯视，上帝视角观察生活流' },
+  { id: 'l3', name: '低角度仰拍', tags: ['运镜'], likes: 2103, img: './covers/cover-3.jpg', prompt: '低角度仰拍军官，顶光勾轮廓，压迫感十足' },
+  { id: 'l4', name: '对称构图', tags: ['构图'], likes: 784, img: './covers/cover-5.jpg', prompt: '中轴对称构图，Wes Anderson 风格，色块平衡' },
+  { id: 'l5', name: '特写面部递进', tags: ['运镜'], likes: 1245, img: './covers/cover-7.jpg', prompt: '多个特写叠化递进，心理镜头语言，百叶窗切割' },
+  { id: 'l6', name: '宏大广角远景', tags: ['构图'], likes: 934, img: './covers/cover-9.jpg', prompt: '超广角末世远景，人物渺小，地平线压低' },
+  { id: 'l7', name: '群像中景', tags: ['构图'], likes: 523, img: './covers/cover-12.jpg', prompt: '三人群像中景，三分法构图，硝烟弥漫背景' },
+  { id: 'l8', name: '升格慢动作', tags: ['运镜'], likes: 612, img: './covers/cover-10.jpg', prompt: '120fps 升格拍摄，爆炸碎片飞溅，时间凝固感' },
+];
+
+// 故事设计 — 优质故事 prompt (竖卡片)
+const STORIES = [
+  {
+    id: 'story-1', name: '归途 · 末世老兵',
+    cover: './covers/cover-3.jpg',
+    genre: '末世 · 战争',
+    duration: '3-5 分钟',
+    acts: 3,
+    tags: ['英雄之旅', '救赎', '独白'],
+    likes: 3420,
+    prompt: '老兵摘下防毒面具，在废弃地堡角落里发现一本泛黄照片册。第一幕：妻子的笑脸与末世空镜交叉剪辑。第二幕：向地表攀爬的漫长过程，途中与一只瘦骨流浪狗结伴。第三幕：抵达家园，却只剩焦黑墙壁——老兵把照片轻轻压在断墙下，转身走向远方。',
+  },
+  {
+    id: 'story-2', name: '擦肩 · 地铁的三分钟',
+    cover: './covers/cover-1.jpg',
+    genre: '都市 · 爱情',
+    duration: '1-2 分钟',
+    acts: 3,
+    tags: ['双线', '蒙太奇', '错过'],
+    likes: 5812,
+    prompt: '两条平行叙事：A 在地铁通道奔跑；B 在另一列车厢翻看一本旧书。关键节点在换乘站台：两人错身而过，B 的书页被气流吹散，A 捡起其中一页但未认出人。结尾 A 将那页纸夹进自己的笔记本，两人各自远去——纸页上写着他们共同的大学座位编号。',
+  },
+  {
+    id: 'story-3', name: '茶楼 · 第七代掌柜',
+    cover: './covers/cover-2.jpg',
+    genre: '港风 · 纪实',
+    duration: '2-3 分钟',
+    acts: 3,
+    tags: ['传承', '生活流', '慢节奏'],
+    likes: 2890,
+    prompt: '清晨港式茶楼开张。老掌柜摩挲着父亲传下的铜壶，与常客们用粤语闲聊家事。孙女从国外归来，带来咖啡豆想改造茶楼——祖孙隔着柜台争执。深夜打烊后，孙女独自坐在空茶楼里，泡了一壶父亲最爱的普洱。第二天早晨，茶楼门口多了一块新招牌：「陈记 · 第七代」。',
+  },
+  {
+    id: 'story-4', name: '镜渊 · 一人分饰六角',
+    cover: './covers/cover-7.jpg',
+    genre: '悬疑 · 心理',
+    duration: '4-6 分钟',
+    acts: 5,
+    tags: ['反转', '身份', '蒙太奇'],
+    likes: 4203,
+    prompt: '心理治疗师日记式叙事。一位来访者描述家中有六位身份迥异的「室友」。每集以一面镜子切入，镜中映出不同版本的她。第五幕真相揭晓：六个身份源自童年的一场交通事故——六位亲人在一瞬间消失。最终她选择留下其中一位「奶奶」继续陪伴自己，镜子逐一熄灭。',
+  },
+  {
+    id: 'story-5', name: '纸手机 · 给外公的最后一通',
+    cover: './covers/cover-8.jpg',
+    genre: '家庭 · 温情',
+    duration: '2-3 分钟',
+    acts: 3,
+    tags: ['代际', '和解', '仪式感'],
+    likes: 7140,
+    prompt: '奶奶在葬礼后开始每天给去世的外公"打电话"——用一台孙女手工折的黄纸手机。孙女起初觉得荒唐，陪伴几天后发现奶奶每次都会讲起外公年轻时的故事。最后一场戏：孙女接过纸手机，第一次主动打给外公，讲述自己今天的恋爱烦恼。镜头拉远，纸手机的"信号灯"轻轻亮起。',
+  },
+  {
+    id: 'story-6', name: 'CRASH LAND · 小狐狸与婴儿',
+    cover: './covers/cover-10.jpg',
+    genre: '童话 · 太空',
+    duration: '3-4 分钟',
+    acts: 3,
+    tags: ['救赎', '陪伴', '卡通 3D'],
+    likes: 5230,
+    prompt: '破碎星球上，一只失去家人的小狐狸捡到一个哭泣的婴儿舱。第一幕：小狐狸用尾巴围住婴儿取暖，发现舱内屏幕指示着一颗遥远母星。第二幕：两人踏上徒步穿越断裂地壳的冒险，途中遇到各种奇异生物。第三幕：抵达唯一的旧货飞船，小狐狸毫不犹豫地把婴儿送上船——自己选择留在废墟上，目送火光离开。',
+  },
+  {
+    id: 'story-7', name: '最后的安魂曲',
+    cover: './covers/cover-11.jpg',
+    genre: '史诗 · 暗黑',
+    duration: '5-7 分钟',
+    acts: 4,
+    tags: ['配乐驱动', '群像', '独奏'],
+    likes: 2450,
+    prompt: '一位大提琴独奏者受邀在万人墓园演奏告别曲。闪回：她的丈夫是军乐团指挥，战争中阵亡。第二幕：演奏过程中，墓碑之间渐渐浮现出每位逝者生前最爱的瞬间（婚礼、孩子出生、简单的一杯咖啡）。第三幕：最后一个音符落下，镜头拉升为上帝视角，十字架如星辰般点亮。',
+  },
+  {
+    id: 'story-8', name: '火葬空间 · 少年与鬼',
+    cover: './covers/cover-6.jpg',
+    genre: '日漫 · 异界',
+    duration: '4-6 分钟',
+    acts: 5,
+    tags: ['战斗', '羁绊', '成长'],
+    likes: 3880,
+    prompt: '少年误入「火葬空间」——一个人类记忆被焚化的异界中转站。他被告知只要战胜七只记忆之鬼，就能保留妹妹去世前的最后一段对话。每一战他都会失去一部分自己的记忆作为代价。最终 BOSS 竟是他妹妹的亡魂化身，少年放下武器，选择让自己被遗忘——换妹妹的记忆完整地留在这个世界。',
+  },
 ];
 
 const STYLES = [
@@ -301,6 +388,7 @@ window.__INSP_DATA__ = {
   PROPS,
   SCENES,
   LENSES,
+  STORIES,
   STYLES,
   REMIXES,
   PROMPTS,
