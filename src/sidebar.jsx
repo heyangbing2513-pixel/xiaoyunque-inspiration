@@ -1,4 +1,4 @@
-const Sidebar = () => {
+const Sidebar = ({ view, onNavigate }) => {
   const { svgPlaceholder } = window.__INSP_DATA__;
   const history = [
     { title: '创意', sub: '动作模仿', thumb: svgPlaceholder('', 64, 64, '#E94560', '#F5AF19') },
@@ -21,8 +21,15 @@ const Sidebar = () => {
         <button className="sb-collapse" aria-label="collapse"><Icon name="panel_left" size={16}/></button>
       </div>
 
-      <button className="sb-new"><Icon name="plus" size={16}/> 新对话</button>
+      <button className="sb-new" onClick={() => onNavigate && onNavigate('home')}><Icon name="plus" size={16}/> 新对话</button>
       <button className="sb-item"><Icon name="folder" size={16}/> 资产库</button>
+      <button
+        className={`sb-item sb-tv${view === 'tv' ? ' active' : ''}`}
+        onClick={() => onNavigate && onNavigate('tv')}
+      >
+        <Icon name="film" size={16}/> 灵感TV
+        <span className="sb-badge-new">New</span>
+      </button>
 
       <div className="sb-section-head">
         <span>历史记录</span>

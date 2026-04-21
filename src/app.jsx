@@ -8,6 +8,7 @@ const App = () => {
   const [tweaks, setTweaks] = useState(window.__TWEAKS__);
   const [tweaksVisible, setTweaksVisible] = useState(false);
   const [detailItem, setDetailItem] = useState(null);
+  const [view, setView] = useState('home'); // 'home' | 'tv'
 
   // Tweaks mode protocol — register listener BEFORE announcing availability
   useEffect(() => {
@@ -68,15 +69,38 @@ const App = () => {
 
   const removeChip = (id) => setChips(prev => prev.filter(c => c.id !== id));
 
+  const navigate = (v) => {
+    setView(v);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <div className="app">
-      <Sidebar/>
+    <div className={`app view-${view}`}>
+      <Sidebar view={view} onNavigate={navigate}/>
       <main className="main">
         <TopBar/>
-        <div className="hero">
-          <Composer text={text} setText={setText} chips={chips} removeChip={removeChip}/>
-        </div>
-        <FeatureRow/>
+        {view === 'home' && (
+          <>
+            <div className="hero">
+              <Composer text={text} setText={setText} chips={chips} removeChip={removeChip}/>
+            </div>
+            <FeatureRow/>
+          </>
+        )}
+        {view === 'tv' && (
+          <div className="tv-header">
+            <button className="tv-back" onClick={() => navigate('home')}>
+              <Icon name="chevron_down" size={16} style={{ transform: 'rotate(90deg)' }}/>
+              返回首页
+            </button>
+            <div className="tv-title">
+              <Icon name="film" size={18}/>
+              <span>灵感 TV</span>
+              <span className="tv-subtitle">沉浸式浏览社区精选作品</span>
+            </div>
+          </div>
+        )}
+        <InspirationBanner onOpen={setDetailItem} onUse={onUse}/>
         <Inspiration onUse={onUse} onRemix={onRemix} onSave={onSave} onOpen={setDetailItem}/>
         <div className="footer-space"/>
       </main>
