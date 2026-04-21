@@ -191,10 +191,10 @@ const FEATURED_DECOMPOSE = {};
 
 // === Characters — 前 4 个为真实古风角色立绘 (fit:contain 保留全身)；c5-c8 为占位
 const CHARACTERS = [
-  { id: 'c1', name: '冷霜', tags: ['古风', '女侠', '清冷'], likes: 4821, img: './characters/冷霜.jpg', fit: 'contain', prompt: '白衣高束发女子，湖蓝腰带，胸前黑玉佩，袖口银色裂纹纹饰，气质冷冽' },
-  { id: 'c2', name: '沧溟', tags: ['古风', '异族', '邪魅'], likes: 3960, img: './characters/沧溟.jpg', fit: 'contain', prompt: '银白长发赤膊男性，双耳戴粉色贝壳饰品，胸口图腾纹身，黑色宽松长裤' },
-  { id: 'c3', name: '柳青', tags: ['古风', '剑修', '儒雅'], likes: 5104, img: './characters/柳青.jpg', fit: 'contain', prompt: '白色长袍内搭湖蓝襦裙，青色祥云纹，头顶黑色蛇形发簪，黑靴，气质儒雅邪性' },
-  { id: 'c4', name: '长老', tags: ['古风', '长辈', '威严'], likes: 3207, img: './characters/长老.jpg', fit: 'contain', prompt: '银白长发额前蓝色印记，深蓝长袍白色交领，铜扣腰带，米色厚底长靴' },
+  { id: 'c1', name: '冷霜', tags: ['古风', '女侠', '清冷'], likes: 4821, img: './characters/lengshuang.jpg', fit: 'contain', prompt: '白衣高束发女子，湖蓝腰带，胸前黑玉佩，袖口银色裂纹纹饰，气质冷冽' },
+  { id: 'c2', name: '沧溟', tags: ['古风', '异族', '邪魅'], likes: 3960, img: './characters/cangming.jpg', fit: 'contain', prompt: '银白长发赤膊男性，双耳戴粉色贝壳饰品，胸口图腾纹身，黑色宽松长裤' },
+  { id: 'c3', name: '柳青', tags: ['古风', '剑修', '儒雅'], likes: 5104, img: './characters/liuqing.jpg', fit: 'contain', prompt: '白色长袍内搭湖蓝襦裙，青色祥云纹，头顶黑色蛇形发簪，黑靴，气质儒雅邪性' },
+  { id: 'c4', name: '长老', tags: ['古风', '长辈', '威严'], likes: 3207, img: './characters/zhanglao.jpg', fit: 'contain', prompt: '银白长发额前蓝色印记，深蓝长袍白色交领，铜扣腰带，米色厚底长靴' },
   { id: 'c5', name: '吉卜力邮差少年', tags: ['吉卜力'], likes: 2843, img: svgPlaceholder('邮差', 500, 500, '#6EE7B7', '#FEF3C7'), prompt: '骑自行车送信的少年，草原背景' },
   { id: 'c6', name: '霓虹女歌手', tags: ['赛博朋克'], likes: 3891, img: svgPlaceholder('歌手', 500, 500, '#EC4899', '#06B6D4'), prompt: '紫色长发，全息麦克风，雨夜舞台' },
   { id: 'c7', name: '机甲少女 · 伊芙', tags: ['科幻'], likes: 3201, img: svgPlaceholder('Eve', 500, 500, '#667EEA', '#F093FB'), prompt: '银白短发机甲少女，赛博朋克，冷光' },
