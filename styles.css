@@ -78,7 +78,12 @@ input,textarea{font-family:inherit}
 .sb-logo{
   display:flex;align-items:center;gap:8px;
   font-weight:600;font-size:15px;color:var(--ink-1);
+  padding: 2px 6px 2px 2px;border-radius: 8px;
+  transition: background .15s, transform .15s;
+  cursor: pointer;
 }
+.sb-logo:hover{background: rgba(139,92,246,0.08)}
+.sb-logo:active{transform: scale(0.96)}
 .sb-logo-mark{
   width:24px;height:24px;border-radius:6px;
   background: url('./assets/logo.png') center/contain no-repeat;
@@ -315,7 +320,7 @@ input,textarea{font-family:inherit}
 
 /* === Inspiration Section (unified light) === */
 .inspiration{
-  margin-top: 28px;
+  margin-top: 14px;
   background: transparent;
   color: var(--insp-ink-1);
   padding: 8px 0 40px;

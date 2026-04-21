@@ -14,10 +14,14 @@ const Sidebar = ({ view, onNavigate }) => {
   return (
     <aside className="sidebar">
       <div className="sb-head">
-        <div className="sb-logo">
+        <button
+          className="sb-logo"
+          onClick={() => onNavigate && onNavigate('home')}
+          title="返回首页"
+        >
           <span className="sb-logo-mark"/>
           小云雀
-        </div>
+        </button>
         <button className="sb-collapse" aria-label="collapse"><Icon name="panel_left" size={16}/></button>
       </div>
 

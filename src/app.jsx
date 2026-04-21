@@ -90,10 +90,6 @@ const App = () => {
         {view === 'tv' && (
           <>
             <div className="tv-header">
-              <button className="tv-back" onClick={() => navigate('home')}>
-                <Icon name="chevron_down" size={16} style={{ transform: 'rotate(90deg)' }}/>
-                返回首页
-              </button>
               <div className="tv-title">
                 <Icon name="film" size={18}/>
                 <span>灵感 TV</span>
