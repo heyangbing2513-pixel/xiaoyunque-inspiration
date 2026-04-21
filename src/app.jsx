@@ -97,7 +97,6 @@ const App = () => {
               <div className="tv-title">
                 <Icon name="film" size={18}/>
                 <span>灵感 TV</span>
-                <span className="tv-subtitle">沉浸式浏览社区精选作品</span>
               </div>
             </div>
             <InspirationBanner onOpen={setDetailItem}/>

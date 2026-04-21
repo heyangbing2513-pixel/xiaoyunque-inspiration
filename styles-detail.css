@@ -298,37 +298,89 @@
   border: 1px solid var(--insp-line-soft, var(--insp-line));
 }
 
-/* know-how list */
-.recipe-knowhow{
-  list-style: none;margin: 0;padding: 0;
+/* 分片段 Know-how */
+.recipe-segments{
+  display: flex;flex-direction: column;gap: 14px;
 }
-.recipe-knowhow > li{
+.recipe-segment{
+  border: 1px solid var(--insp-line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.segment-head{
   position: relative;
-  display: flex;align-items: flex-start;gap: 12px;
-  padding: 10px 12px;
-  border-radius: 10px;
+  height: 42px;
+  background-size: cover;background-position: center;
+  display: flex;align-items: center;
+  padding: 0 14px;
+}
+.segment-scrim{
+  position: absolute;inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.15) 100%);
+}
+.segment-name{
+  position: relative;
+  color: #fff;
+  font-size: 12.5px;font-weight: 600;letter-spacing: .3px;
+}
+.segment-tips{
+  list-style: none;margin: 0;padding: 4px 0;
+}
+.segment-tip{
+  padding: 10px 14px;
+  border-top: 1px solid var(--insp-line);
   transition: background .18s;
 }
-.recipe-knowhow > li:hover{ background: var(--bg-panel); }
-.recipe-knowhow > li + li{
-  border-top: 1px solid var(--insp-line);
+.segment-tips > li:first-child{ border-top: none; }
+.segment-tip:hover{ background: var(--bg-panel); }
+.segment-tip.expanded{ background: var(--bg-panel); }
+
+.tip-row{
+  display: flex;align-items: flex-start;gap: 12px;
 }
-.knowhow-content{
+.tip-text{
   flex: 1;min-width: 0;
   display: flex;flex-direction: column;gap: 3px;
 }
-.knowhow-content strong{
+.tip-text strong{
   font-size: 12.5px;font-weight: 600;
   color: var(--insp-warm);
   letter-spacing: .2px;
 }
-.knowhow-content span{
+.tip-text span{
   font-size: 12.5px;line-height: 1.55;
   color: var(--insp-ink-2);
 }
-.recipe-knowhow .recipe-thumb-actions{
-  position: static;opacity: 1;
-  flex-shrink: 0;
+.tip-actions{
+  display: flex;gap: 4px;flex-shrink: 0;
+}
+
+.tip-prompt{
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid var(--insp-line);
+  border-radius: 8px;
+  animation: tipPromptIn .28s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes tipPromptIn{
+  from{ opacity: 0; transform: translateY(-4px); }
+  to  { opacity: 1; transform: translateY(0); }
+}
+.tip-prompt-label{
+  display: inline-block;
+  font-size: 10.5px;font-weight: 700;
+  letter-spacing: .6px;
+  color: var(--insp-warm);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.tip-prompt p{
+  margin: 0;
+  font-size: 12px;line-height: 1.7;
+  color: var(--insp-ink-2);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
 }
 
 /* ==========================================================================
@@ -456,7 +508,7 @@
    灵感TV header
    ========================================================================== */
 .tv-header{
-  display: flex;align-items: center;gap: 18px;
+  display: flex;align-items: center;gap: 16px;
   padding: 20px 40px 0;
   max-width: 1440px;margin: 0 auto;
 }

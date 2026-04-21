@@ -316,7 +316,7 @@ input,textarea{font-family:inherit}
   padding: 8px 0 40px;
   position: relative;
 }
-.insp-wrap{max-width: 1080px; margin: 0 auto; padding: 0 28px}
+.insp-wrap{max-width: 1440px; margin: 0 auto; padding: 0 40px}
 
 /* AI search (inline with tabs row) */
 .insp-search{

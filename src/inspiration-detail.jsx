@@ -7,6 +7,7 @@ const InspirationDetail = ({ item, onClose, onUse }) => {
   const { buildDetail } = window.__INSP_DATA__;
   const detail = React.useMemo(() => item ? buildDetail(item) : null, [item]);
   const [playing, setPlaying] = React.useState(true);
+  const [expandedTip, setExpandedTip] = React.useState(null); // `${segmentIdx}-${tipIdx}`
 
   // ESC 关闭
   React.useEffect(() => {
@@ -78,7 +79,15 @@ const InspirationDetail = ({ item, onClose, onUse }) => {
             <Icon name="sparkle" size={14}/> 灵感配方
           </h3>
 
-          {/* 角色 */}
+          {/* 1. 创作背景 */}
+          <section className="recipe-section">
+            <div className="recipe-section-head">
+              <span>创作背景</span>
+            </div>
+            <p className="recipe-prose">{detail.background}</p>
+          </section>
+
+          {/* 2. 作品角色 */}
           <section className="recipe-section">
             <div className="recipe-section-head">
               <span>作品角色 · {detail.characters.length}</span>
@@ -115,7 +124,7 @@ const InspirationDetail = ({ item, onClose, onUse }) => {
             </div>
           </section>
 
-          {/* 场景 */}
+          {/* 3. 作品场景 */}
           <section className="recipe-section">
             <div className="recipe-section-head">
               <span>作品场景 · {detail.scenes.length}</span>
@@ -139,7 +148,7 @@ const InspirationDetail = ({ item, onClose, onUse }) => {
             </div>
           </section>
 
-          {/* 中间帧 */}
+          {/* 4. 中间帧 */}
           <section className="recipe-section">
             <div className="recipe-section-head">
               <span>中间帧 · {detail.keyframes.length}</span>
@@ -157,41 +166,65 @@ const InspirationDetail = ({ item, onClose, onUse }) => {
             </div>
           </section>
 
-          {/* 创作背景 */}
+          {/* 5. 分片段 Know-how */}
           <section className="recipe-section">
             <div className="recipe-section-head">
-              <span>创作背景</span>
+              <span>分片段 Know-how · {detail.knowhow.length} 段</span>
             </div>
-            <p className="recipe-prose">{detail.background}</p>
-          </section>
-
-          {/* 创作 Know-how */}
-          <section className="recipe-section">
-            <div className="recipe-section-head">
-              <span>创作 Know-how · {detail.knowhow.length}</span>
-            </div>
-            <ul className="recipe-knowhow">
-              {detail.knowhow.map((k, i) => (
-                <li key={i}>
-                  <div className="knowhow-content">
-                    <strong>{k.title}</strong>
-                    <span>{k.tip}</span>
+            <div className="recipe-segments">
+              {detail.knowhow.map((seg, si) => (
+                <div key={si} className="recipe-segment">
+                  <div
+                    className="segment-head"
+                    style={{ backgroundImage: `url(${seg.cover})` }}
+                  >
+                    <div className="segment-scrim"/>
+                    <span className="segment-name">{seg.segment}</span>
                   </div>
-                  <div className="recipe-thumb-actions">
-                    <button
-                      className="chip-btn"
-                      onClick={() => addToComposer('know-how', `${k.title}：${k.tip}`)}
-                      title="加入输入框"
-                    >
-                      <Icon name="add_plus" size={10}/>
-                    </button>
-                    <button className="chip-btn" title="存资产库">
-                      <Icon name="bookmark" size={10}/>
-                    </button>
-                  </div>
-                </li>
+                  <ul className="segment-tips">
+                    {seg.tips.map((t, ti) => {
+                      const key = `${si}-${ti}`;
+                      const expanded = expandedTip === key;
+                      return (
+                        <li key={ti} className={`segment-tip ${expanded ? 'expanded' : ''}`}>
+                          <div className="tip-row">
+                            <div className="tip-text">
+                              <strong>{t.title}</strong>
+                              <span>{t.tip}</span>
+                            </div>
+                            <div className="tip-actions">
+                              <button
+                                className="chip-btn"
+                                onClick={() => setExpandedTip(expanded ? null : key)}
+                                title={expanded ? '收起' : '展开 prompt'}
+                              >
+                                <Icon name={expanded ? 'x' : 'chevron_down'} size={10}/>
+                              </button>
+                              <button
+                                className="chip-btn"
+                                onClick={() => addToComposer('know-how', `${t.title}：${t.prompt}`)}
+                                title="加入输入框"
+                              >
+                                <Icon name="add_plus" size={10}/>
+                              </button>
+                              <button className="chip-btn" title="存资产库">
+                                <Icon name="bookmark" size={10}/>
+                              </button>
+                            </div>
+                          </div>
+                          {expanded && (
+                            <div className="tip-prompt">
+                              <span className="tip-prompt-label">完整 Prompt</span>
+                              <p>{t.prompt}</p>
+                            </div>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </section>
         </div>
       </div>
