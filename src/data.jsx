@@ -265,6 +265,34 @@ const PROMPTS = [
   { id: 'pt6', name: '美食广告', tags: ['模板', '商业'], likes: 2840, prompt: '[升格] 酱汁倾倒 → [宏观] 食材纹理 → [慢推] 最终成品，金色暖光' },
 ];
 
+// === Detail 构造：为每个作品派生"灵感配方"详情数据（MVP 共用模板）
+// 每次调用按 item 组合：创作者信息 / 角色 / 场景 / 中间帧 / 创作背景 / know-how
+const buildDetail = (item) => {
+  // 简单按 tags 选 3 个角色 + 2 个场景（循环 mod 取，保证稳定）
+  const idx = parseInt(item.id.replace('f',''), 10) || 1;
+  const pick = (arr, n) => Array.from({length: n}, (_, i) => arr[(idx + i) % arr.length]);
+  return {
+    creator: {
+      name: item.author.name,
+      avatar: item.author.avatar,
+      bio: `AI 影像创作者 · 擅长「${item.tags[0]}」题材`,
+      works: 4 + (idx * 3) % 40,
+      followers: 120 + (idx * 47) % 2400,
+    },
+    background: `「${item.title}」灵感来自创作者对${item.tags[0]}题材的个人叙事表达。${item.prompt}。作品通过镜头语言与氛围光影的平衡，让观众在 ${item.duration} 内完成一次情绪抵达。`,
+    characters: pick(CHARACTERS, 3),
+    scenes: pick(SCENES, 2),
+    // MVP：用 cover 复用作中间帧占位（3 张）
+    keyframes: [item.cover, item.cover, item.cover],
+    knowhow: [
+      { title: '镜头', tip: '低机位 + 长焦压缩空间感，主角占据黄金分割点' },
+      { title: '光影', tip: '顶光勾轮廓 + 底部冷色补光，避免面部过曝' },
+      { title: '配色', tip: `主调 2-3 种，参考${item.tags[0]}常用色板` },
+      { title: '节奏', tip: `前 3 秒必须抓住注意力，${item.duration} 内完成情绪起承转合` },
+    ],
+  };
+};
+
 window.__INSP_DATA__ = {
   INSPIRATION_TABS,
   FEATURED_WORKS,
@@ -277,4 +305,5 @@ window.__INSP_DATA__ = {
   REMIXES,
   PROMPTS,
   svgPlaceholder,
+  buildDetail,
 };

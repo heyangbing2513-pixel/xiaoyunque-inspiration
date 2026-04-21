@@ -7,6 +7,7 @@ const App = () => {
   const [toast, setToast] = useState(null);
   const [tweaks, setTweaks] = useState(window.__TWEAKS__);
   const [tweaksVisible, setTweaksVisible] = useState(false);
+  const [detailItem, setDetailItem] = useState(null);
 
   // Tweaks mode protocol — register listener BEFORE announcing availability
   useEffect(() => {
@@ -72,9 +73,15 @@ const App = () => {
           <Composer text={text} setText={setText} chips={chips} removeChip={removeChip}/>
         </div>
         <FeatureRow/>
-        <Inspiration onUse={onUse} onRemix={onRemix}/>
+        <Inspiration onUse={onUse} onRemix={onRemix} onOpen={setDetailItem}/>
         <div className="footer-space"/>
       </main>
+
+      <InspirationDetail
+        item={detailItem}
+        onClose={() => setDetailItem(null)}
+        onUse={(it) => { onUse(it); }}
+      />
 
       {toast && (
         <div className="toast">

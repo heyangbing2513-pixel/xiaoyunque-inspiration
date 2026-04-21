@@ -1,7 +1,10 @@
 // Inspiration card used in masonry (精选作品 tab)
-const InspirationCard = ({ item, onUse, onRemix }) => {
+const InspirationCard = ({ item, onOpen }) => {
   return (
-    <div className={`insp-card ${item.duration ? 'video' : ''}`}>
+    <div
+      className={`insp-card ${item.duration ? 'video' : ''}`}
+      onClick={() => onOpen && onOpen(item)}
+    >
       <div
         className="insp-media"
         style={{
@@ -19,18 +22,11 @@ const InspirationCard = ({ item, onUse, onRemix }) => {
             <Icon name="play" size={9}/> {item.duration}
           </div>
         )}
-      </div>
-
-      <div className="insp-overlay">
-        <span className="insp-prompt-label">Prompt</span>
-        <div className="insp-prompt">{item.prompt}</div>
-        <div className="insp-actions">
-          <button className="insp-btn ghost" onClick={(e) => { e.stopPropagation(); onRemix(item); }}>
-            <Icon name="shuffle" size={13}/> Remix
-          </button>
-          <button className="insp-btn primary" onClick={(e) => { e.stopPropagation(); onUse(item); }}>
-            <Icon name="add_plus" size={13}/> 使用
-          </button>
+        {/* Hover: 播放态 — 只显示一个大播放按钮，模拟点击即播放 */}
+        <div className="insp-play-overlay">
+          <div className="insp-play-btn">
+            <Icon name="play" size={28}/>
+          </div>
         </div>
       </div>
 

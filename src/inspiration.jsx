@@ -1,5 +1,5 @@
 // Main inspiration module - orchestrates tabs, search, layout
-const Inspiration = ({ onUse, onRemix }) => {
+const Inspiration = ({ onUse, onRemix, onOpen }) => {
   const {
     INSPIRATION_TABS, FEATURED_WORKS, FEATURED_DECOMPOSE,
     CHARACTERS, PROPS, SCENES, LENSES, STYLES, REMIXES, PROMPTS
@@ -20,7 +20,7 @@ const Inspiration = ({ onUse, onRemix }) => {
       return (
         <div className="works-grid">
           {FEATURED_WORKS.map(item => (
-            <InspirationCard key={item.id} item={item} onUse={(v) => onUse({ id:item.id, kind:'作品', label:item.title, thumb:item.cover, prompt:item.prompt })} onRemix={onRemix}/>
+            <InspirationCard key={item.id} item={item} onOpen={onOpen}/>
           ))}
         </div>
       );

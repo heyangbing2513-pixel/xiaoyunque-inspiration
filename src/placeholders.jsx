@@ -40,6 +40,9 @@ const Icon = ({ name, size = 16, className = '', style = {} }) => {
     sound: <><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15 9a4 4 0 0 1 0 6"/></>,
     drag: <><circle cx="9" cy="5" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="9" cy="19" r="1.5"/><circle cx="15" cy="5" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="15" cy="19" r="1.5"/></>,
     wand: <><path d="M15 4l5 5-11 11H4v-5z"/><path d="M14 5l5 5"/></>,
+    pause: <><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor" stroke="none"/></>,
+    bookmark: <path d="M6 3h12v18l-6-4-6 4z"/>,
+    close: <path d="M18 6L6 18M6 6l12 12"/>,
   };
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24"
