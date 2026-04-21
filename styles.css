@@ -664,6 +664,7 @@ input,textarea{font-family:inherit}
   background-size:cover;background-position:center;
   position:relative;
 }
+.insp-asset.character .insp-asset-img{aspect-ratio: 3/4}
 .insp-asset.scene .insp-asset-img{aspect-ratio: 16/10}
 .insp-asset.prop .insp-asset-img{aspect-ratio: 4/5}
 .insp-asset-meta{padding: 9px 12px 11px}

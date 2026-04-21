@@ -56,9 +56,16 @@ const InspirationCard = ({ item, onUse, onRemix }) => {
 
 // Compact asset card for 角色/道具/场景/风格 etc.
 const AssetCard = ({ item, kind, onUse, onRemix }) => {
+  const imgStyle = { backgroundImage: `url(${item.img})` };
+  // 真实角色立绘 (白底竖图) 用 contain 保留全身；占位 svg 方图保持 cover
+  if (item.fit === 'contain') {
+    imgStyle.backgroundSize = 'contain';
+    imgStyle.backgroundRepeat = 'no-repeat';
+    imgStyle.backgroundColor = '#FFFFFF';
+  }
   return (
     <div className={`insp-asset ${kind}`}>
-      <div className="insp-asset-img" style={{backgroundImage:`url(${item.img})`}}>
+      <div className="insp-asset-img" style={imgStyle}>
         <div className="insp-overlay" style={{padding:12}}>
           {item.prompt && (
             <>
