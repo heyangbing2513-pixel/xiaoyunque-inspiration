@@ -3,7 +3,7 @@
  * [OUTPUT]: 大轮播 Hero Banner — 精品感的沉浸式横幅，含作者/tag/标题/按钮
  * [POS]: 灵感模块入口顶部，主页与灵感TV 共用
  */
-const InspirationBanner = ({ onOpen, onUse }) => {
+const InspirationBanner = ({ onOpen }) => {
   const { FEATURED_WORKS } = window.__INSP_DATA__;
   // 挑 5 条有 official 或 remix/likes 高的，过滤掉不当意象
   const slides = React.useMemo(() => {
@@ -42,6 +42,9 @@ const InspirationBanner = ({ onOpen, onUse }) => {
             className={`banner-slide ${i === idx ? 'active' : ''}`}
             style={{ backgroundImage: `url(${s.cover})` }}
             aria-hidden={i !== idx}
+            onClick={() => i === idx && onOpen && onOpen(s)}
+            role="button"
+            tabIndex={i === idx ? 0 : -1}
           >
             <div className="banner-scrim"/>
             <div className="banner-content">
@@ -65,14 +68,11 @@ const InspirationBanner = ({ onOpen, onUse }) => {
                 <span><Icon name="heart" size={11}/> {s.likes.toLocaleString()}</span>
               </div>
               <div className="banner-actions">
-                <button className="banner-btn primary" onClick={() => onOpen && onOpen(s)}>
-                  <Icon name="play" size={14}/> 观看详情
-                </button>
                 <button
-                  className="banner-btn ghost"
-                  onClick={() => onUse && onUse({ id: s.id, kind: '参考作品', label: s.title, thumb: s.cover })}
+                  className="banner-btn primary"
+                  onClick={(e) => { e.stopPropagation(); onOpen && onOpen(s); }}
                 >
-                  <Icon name="add_plus" size={14}/> 作为灵感
+                  <Icon name="play" size={14}/> 观看详情
                 </button>
               </div>
             </div>
@@ -80,10 +80,10 @@ const InspirationBanner = ({ onOpen, onUse }) => {
         ))}
       </div>
 
-      <button className="banner-nav prev" onClick={() => go(-1)} aria-label="上一张">
+      <button className="banner-nav prev" onClick={(e) => { e.stopPropagation(); go(-1); }} aria-label="上一张">
         <Icon name="chevron_down" size={20} style={{ transform: 'rotate(90deg)' }}/>
       </button>
-      <button className="banner-nav next" onClick={() => go(1)} aria-label="下一张">
+      <button className="banner-nav next" onClick={(e) => { e.stopPropagation(); go(1); }} aria-label="下一张">
         <Icon name="chevron_down" size={20} style={{ transform: 'rotate(-90deg)' }}/>
       </button>
 
@@ -92,7 +92,7 @@ const InspirationBanner = ({ onOpen, onUse }) => {
           <button
             key={s.id}
             className={`banner-dot-btn ${i === idx ? 'active' : ''}`}
-            onClick={() => goTo(i)}
+            onClick={(e) => { e.stopPropagation(); goTo(i); }}
             aria-label={`切到第 ${i + 1} 张`}
           >
             <span className="banner-dot-fill"/>

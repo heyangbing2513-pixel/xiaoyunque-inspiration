@@ -88,19 +88,21 @@ const App = () => {
           </>
         )}
         {view === 'tv' && (
-          <div className="tv-header">
-            <button className="tv-back" onClick={() => navigate('home')}>
-              <Icon name="chevron_down" size={16} style={{ transform: 'rotate(90deg)' }}/>
-              返回首页
-            </button>
-            <div className="tv-title">
-              <Icon name="film" size={18}/>
-              <span>灵感 TV</span>
-              <span className="tv-subtitle">沉浸式浏览社区精选作品</span>
+          <>
+            <div className="tv-header">
+              <button className="tv-back" onClick={() => navigate('home')}>
+                <Icon name="chevron_down" size={16} style={{ transform: 'rotate(90deg)' }}/>
+                返回首页
+              </button>
+              <div className="tv-title">
+                <Icon name="film" size={18}/>
+                <span>灵感 TV</span>
+                <span className="tv-subtitle">沉浸式浏览社区精选作品</span>
+              </div>
             </div>
-          </div>
+            <InspirationBanner onOpen={setDetailItem}/>
+          </>
         )}
-        <InspirationBanner onOpen={setDetailItem} onUse={onUse}/>
         <Inspiration onUse={onUse} onRemix={onRemix} onSave={onSave} onOpen={setDetailItem}/>
         <div className="footer-space"/>
       </main>

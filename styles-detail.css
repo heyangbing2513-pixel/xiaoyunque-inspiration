@@ -523,6 +523,7 @@
   opacity: 1;
   transform: scale(1.06);
   pointer-events: auto;
+  cursor: pointer;
 }
 
 .banner-scrim{
