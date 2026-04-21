@@ -31,10 +31,10 @@ src/
   feature-row.jsx    # 功能卡片行
   inspiration.jsx    # 灵感流容器
   inspiration-card.jsx
-  inspiration-featured.jsx
   data.jsx           # mock 数据
   placeholders.jsx   # 占位图
   tweaks.jsx         # 可视化微调面板
+covers/              # 作品封面图 (12 张横图)
 screenshots/         # 设计参考截图
 ```
 

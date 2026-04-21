@@ -16,23 +16,13 @@ const Inspiration = ({ onUse, onRemix }) => {
 
   const renderContent = () => {
     if (tab === 'featured') {
-      // masonry with featured hero spanning 2 columns
-      const hero = FEATURED_WORKS[0];
-      const rest = FEATURED_WORKS.slice(1);
+      // 统一横图网格 — 所有作品等宽等高
       return (
-        <>
-          <InspirationFeatured
-            item={hero}
-            decompose={FEATURED_DECOMPOSE[hero.id]}
-            onUse={onUse}
-            onRemix={onRemix}
-          />
-          <div className="masonry">
-            {rest.map(item => (
-              <InspirationCard key={item.id} item={item} onUse={(v) => onUse({ id:item.id, kind:'作品', label:item.title, thumb:item.cover, prompt:item.prompt })} onRemix={onRemix}/>
-            ))}
-          </div>
-        </>
+        <div className="works-grid">
+          {FEATURED_WORKS.map(item => (
+            <InspirationCard key={item.id} item={item} onUse={(v) => onUse({ id:item.id, kind:'作品', label:item.title, thumb:item.cover, prompt:item.prompt })} onRemix={onRemix}/>
+          ))}
+        </div>
       );
     }
     if (tab === 'character') {

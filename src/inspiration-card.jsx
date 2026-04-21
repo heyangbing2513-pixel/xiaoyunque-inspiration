@@ -1,12 +1,12 @@
 // Inspiration card used in masonry (精选作品 tab)
 const InspirationCard = ({ item, onUse, onRemix }) => {
   return (
-    <div className={`insp-card ${item.duration ? 'video' : ''}`} style={{ breakInside: 'avoid' }}>
+    <div className={`insp-card ${item.duration ? 'video' : ''}`}>
       <div
         className="insp-media"
         style={{
           backgroundImage: `url(${item.cover})`,
-          aspectRatio: item.aspect || '3/4',
+          aspectRatio: item.aspect || '16/9',
         }}
       >
         {item.official && (
