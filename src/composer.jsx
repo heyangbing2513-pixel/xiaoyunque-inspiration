@@ -45,7 +45,7 @@ const Composer = ({ text, setText, chips, removeChip }) => {
       </div>
 
       <div className="suggest-row">
-        {['皮卡丘黑化救盘素解密','带土猫耳卡点换装','小猫去旅游','猫狗偷玩手机一秒露馅'].map((s, i) => (
+        {['古风女侠雪夜出剑','宠物卡点变装视频','鱼眼镜头街头特写','手绘线稿转动画'].map((s, i) => (
           <button className="chip" key={i} onClick={() => setText(s)}>{s}</button>
         ))}
         <button className="chip-refresh"><Icon name="refresh" size={14}/></button>

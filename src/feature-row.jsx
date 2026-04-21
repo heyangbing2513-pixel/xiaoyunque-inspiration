@@ -7,12 +7,11 @@ const FeatureRow = () => {
     { id: 'anime', label: '腿情创作' },
     { id: 'market', label: '营销增长' },
   ];
-  const { svgPlaceholder } = window.__INSP_DATA__;
   const cards = [
-    { title: '短剧 Agent', sub: 'Seedance 2.0 最新支持1080P', badge: 'New', bg: svgPlaceholder('', 600, 400, '#065F46', '#78350F') },
-    { title: 'Seedance 2.0', sub: '首发试用', bg: svgPlaceholder('', 600, 400, '#F472B6', '#78350F') },
-    { title: '爆款复刻', sub: '自动解析爆点、参考文案/主题/画风', bg: svgPlaceholder('', 600, 400, '#1F2937', '#EC4899') },
-    { title: '一镜到底', sub: '多张图片生成连续自然的镜头', bg: svgPlaceholder('', 600, 400, '#44403C', '#6B7280') },
+    { title: '短剧 Agent', sub: 'Seedance 2.0 最新支持1080P', badge: 'New', bg: './covers/cover-6.jpg' },
+    { title: 'Seedance 2.0', sub: '首发试用', bg: './covers/cover-10.jpg' },
+    { title: '爆款复刻', sub: '自动解析爆点、参考文案/主题/画风', bg: './covers/cover-8.jpg' },
+    { title: '一镜到底', sub: '多张图片生成连续自然的镜头', bg: './covers/cover-11.jpg' },
   ];
   return (
     <section className="feature-section">
